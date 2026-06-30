@@ -121,7 +121,7 @@ class CustomCursor {
 	}
 
 	init() {
-		document.addEventListener('mousemove', (e) => {
+		window.addEventListener('mousemove', (e) => {
 			this.cursor.style.display = `inline-block`;
 			this.cursor.style.transform = 
 				`translate(${e.clientX - 6}px, ${e.clientY -3}px)`;
