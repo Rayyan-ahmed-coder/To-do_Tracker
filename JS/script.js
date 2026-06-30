@@ -110,28 +110,24 @@ function addTask() {
 }
 
 class CustomCursor {
-    constructor() {
-        this.cursor = document.getElementById('cursor');
+	constructor() {
+		this.cursor = document.querySelector('.cursor');
+		
+		if (this.cursor && window.matchMedia('(pointer: fine)').matches) {
+			this.init();
+		} else if (this.cursor) {
+			this.cursor.style.display = 'none';
+		}
+	}
 
-        // Check if cursor exists and user is using a mouse/pointer device
-        if (this.cursor && window.matchMedia('(pointer: fine)').matches) {
-            this.init();
-        } else if (this.cursor) {
-            this.cursor.style.display = 'none';
-        }
-    }
-
-    init() {
-        window.addEventListener('mousemove', (e) => {
-            this.cursor.style.display = 'block';
-            this.cursor.style.transform = 
-                `translate(${e.clientX - 6}px, ${e.clientY - 3}px)`;
-        });
-    }
+	init() {
+		document.addEventListener('mousemove', (e) => {
+			this.cursor.style.display = `inline-block`;
+			this.cursor.style.transform = 
+				`translate(${e.clientX - 6}px, ${e.clientY -3}px)`;
+		});
+	}
 }
-
-// Instantiate the class
-new CustomCursor();
 
 addButton.addEventListener('click', addTask);
 
