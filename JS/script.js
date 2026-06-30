@@ -109,6 +109,30 @@ function addTask() {
     renderTasks();
 }
 
+class CustomCursor {
+    constructor() {
+        this.cursor = document.getElementById('cursor');
+
+        // Check if cursor exists and user is using a mouse/pointer device
+        if (this.cursor && window.matchMedia('(pointer: fine)').matches) {
+            this.init();
+        } else if (this.cursor) {
+            this.cursor.style.display = 'none';
+        }
+    }
+
+    init() {
+        window.addEventListener('mousemove', (e) => {
+            this.cursor.style.display = 'block';
+            this.cursor.style.transform = 
+                `translate(${e.clientX - 6}px, ${e.clientY - 3}px)`;
+        });
+    }
+}
+
+// Instantiate the class
+new CustomCursor();
+
 addButton.addEventListener('click', addTask);
 
 taskInput.addEventListener('keydown', event => {
@@ -138,4 +162,8 @@ clearAllButton.addEventListener('click', () => {
     renderTasks();
 });
 
-renderTasks();
+
+document.addEventListener(`DOMContentLoaded`, () => {
+    new CustomCursor();
+    renderTasks();
+})
